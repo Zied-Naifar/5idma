@@ -32,7 +32,7 @@ const styles = theme => ({
     display: "flex"
   },
   paper: {
-    marginRight: theme.spacing.unit * 2,
+    marginRight: theme.spacing(2),
     minWidth: "150px"
   },
   appBar: {
@@ -80,9 +80,9 @@ const styles = theme => ({
     width: "100%"
   },
   inputInput: {
-    paddingTop: theme.spacing,
-    paddingRight: theme.spacing,
-    paddingBottom: theme.spacing,
+    paddingTop: theme.spacing(1),
+    paddingRight: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
     paddingLeft: theme.spacing(10),
     transition: theme.transitions.create("width"),
     width: "100%",

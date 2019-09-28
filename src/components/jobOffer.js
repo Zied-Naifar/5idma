@@ -29,7 +29,7 @@ OutlinedButtons.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-OutlinedButtons = withStyles(styles)(OutlinedButtons);
+const StyledOutlinedButtons = withStyles(styles)(OutlinedButtons);
 
 export class JobOffer extends Component {
   render() {
@@ -79,7 +79,7 @@ export class JobOffer extends Component {
             <div className="offer-card-buttons">
               <div className="offer-card-skills">
                 {offer.skills.map((skill, i) => (
-                  <OutlinedButtons skill={skill} key={i}/>
+                  <StyledOutlinedButtons skill={skill} key={i}/>
                 ))}
               </div>
               <Button

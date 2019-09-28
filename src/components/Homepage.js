@@ -10,8 +10,8 @@ export default class Homepage extends Component {
   render() {
     return (
       <div className="homepage">
-        <div class="split-screen">
-          <div class="half-screen">
+        <div className="split-screen">
+          <div className="half-screen">
             <div>
               <div className="banner-text">
                 <h1>Espace Étudiant</h1>
@@ -31,7 +31,7 @@ export default class Homepage extends Component {
               </div>
             </div>
           </div>
-          <div class="half-screen">
+          <div className="half-screen">
             <div className="banner-text">
               <h1>Espace Entreprise</h1>
               <p>
@@ -84,7 +84,7 @@ export default class Homepage extends Component {
               <section>
                 <div className="content">
                   <header>
-                    <a href="#">
+                    <a href="/">
                       <img src={timeIcon} alt="timeIcon" className="icon" />
                     </a>
                     <h3>Save Time</h3>
@@ -99,7 +99,7 @@ export default class Homepage extends Component {
               <section>
                 <div className="content">
                   <header>
-                    <a href="#">
+                    <a href="/">
                       <img src={moneyIcon} alt="moneyIcon" className="icon" />
                     </a>
                     <h3>Save Money</h3>
@@ -113,7 +113,7 @@ export default class Homepage extends Component {
               <section>
                 <div className="content">
                   <header>
-                    <a href="#">
+                    <a href="/">
                       <img
                         src={matchingIcon}
                         alt="matchingIcon"
@@ -182,16 +182,16 @@ export default class Homepage extends Component {
                 <h4>Sem turpis amet semper</h4>
                 <ul className="alt">
                   <li>
-                    <a href="#">Dolor pulvinar sed etiam.</a>
+                    <a href="/">Dolor pulvinar sed etiam.</a>
                   </li>
                   <li>
-                    <a href="#">Etiam vel lorem sed amet.</a>
+                    <a href="/">Etiam vel lorem sed amet.</a>
                   </li>
                   <li>
-                    <a href="#">Felis enim feugiat viverra.</a>
+                    <a href="/">Felis enim feugiat viverra.</a>
                   </li>
                   <li>
-                    <a href="#">Dolor pulvinar magna etiam.</a>
+                    <a href="/">Dolor pulvinar magna etiam.</a>
                   </li>
                 </ul>
               </section>
@@ -199,22 +199,22 @@ export default class Homepage extends Component {
                 <h4>Magna sed ipsum</h4>
                 <ul className="plain">
                   <li>
-                    <a href="#">
+                    <a href="/">
                       <i className="icon fa-twitter">&nbsp;</i>Twitter
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a href="/">
                       <i className="icon fa-facebook">&nbsp;</i>Facebook
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a href="/">
                       <i className="icon fa-instagram">&nbsp;</i>Instagram
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a href="/">
                       <i className="icon fa-github">&nbsp;</i>Github
                     </a>
                   </li>

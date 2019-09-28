@@ -24,9 +24,9 @@ class AddOffre extends Component {
       disabled: false
     };
 
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onCheck = this.onCheck.bind(this);
+     
+     ;
+     
   }
 
   componentWillReceiveProps(nextProps) {
@@ -35,7 +35,7 @@ class AddOffre extends Component {
     }
   }
 
-  onSubmit(e) {
+  onSubmit=(e)=> {
     e.preventDefault();
 
     const offreData = {
@@ -55,11 +55,11 @@ class AddOffre extends Component {
     this.props.addOffre(offreData, this.props.history);
   }
 
-  onChange(e) {
+  onChange=(e)=> {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  onCheck(e) {
+  onCheck=(e)=> {
     this.setState({
       disabled: !this.state.disabled,
       current: !this.state.current

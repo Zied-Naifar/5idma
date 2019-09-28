@@ -26,8 +26,8 @@ import { createProfileCompany ,getCurrentProfileCompany} from '../../actions/pro
        category:'',
        description:'',
      };
-     this.onChange = this.onChange.bind(this);
-     this.onSubmit = this.onSubmit.bind(this);
+      
+      ;
    }
   componentDidMount (){
       this.props.getCurrentProfileCompany();
@@ -73,7 +73,7 @@ console.log(profileCompany.handle)
 
     }
   }
-  onSubmit(e) {
+  onSubmit=(e)=> {
     e.preventDefault();
     const profileCompanyData = {
       handle: this.state.handle,
@@ -90,7 +90,7 @@ console.log(profileCompany.handle)
     };
     this.props.createProfileCompany(profileCompanyData, this.props.history)
   }
-  onChange(e) {
+  onChange=(e)=> {
     this.setState({ [e.target.name]: e.target.value });
   }
 //console.log(profileCompanyData)

@@ -13,8 +13,8 @@ class LoginAdmin extends Component {
             password:'',
             errors:{}
         };
-        this.onChange=this.onChange.bind(this);
-        this.onSubmit=this.onSubmit.bind(this);
+         
+         
     }
 componentDidMount(){
   if (this.props.authAdmin.isTestify) {
@@ -31,7 +31,7 @@ componentDidMount(){
         this.setState({ errors: nextProps.errors });
       }
     }
-    onSubmit(e){
+    onSubmit=(e)=>{
         e.preventDefault();
        
         const adminData={
@@ -42,7 +42,7 @@ componentDidMount(){
         }
          this.props.loginAdmin(adminData);
     }
-    onChange(e){this.setState({[e.target.name]:e.target.value})}
+    onChange=(e)=>{this.setState({[e.target.name]:e.target.value})}
   render() {
     const {errors}=this.state;
     return (

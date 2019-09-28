@@ -43,11 +43,10 @@ export const clearCurrentProfileCompany = () => {
 // Create Profile
 export const createProfileCompany = (
   profileCompanyData,
-  history,
-  id
+  history
 ) => dispatch => {
   axios
-    .post(`/api/companyprofile/${id}`, profileCompanyData)
+    .post('/api/companyprofile', profileCompanyData)
     .then(res => history.push("/dashboardCompany"))
     .catch(err =>
       dispatch({

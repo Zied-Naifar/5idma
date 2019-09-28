@@ -23,17 +23,18 @@ class CreateCompanyProfile extends Component {
       category: "",
       description: ""
     };
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+     
+     ;
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
   }
-  onSubmit(e) {
+  onSubmit=(e)=> {
     e.preventDefault();
     const profileCompanyData = {
+      id: this.state.authCompany.id,
       handle: this.state.handle,
       description: this.state.description,
       category: this.state.category,
@@ -45,9 +46,9 @@ class CreateCompanyProfile extends Component {
       youtube: this.state.youtube,
       instagram: this.state.instagram
     };
-    this.props.createProfileCompany(profileCompanyData, this.props.history, this.props.authCompany.company.id);
+    this.props.createProfileCompany(profileCompanyData, this.props.history);
   }
-  onChange(e) {
+  onChange=(e)=> {
     this.setState({ [e.target.name]: e.target.value });
   }
   render() {
@@ -191,7 +192,7 @@ CreateCompanyProfile.propTypes = {
 };
 const mapStateToProps = state => ({
   profileCompany: state.profileCompany,
-  authCompany:state.authCompany,
+  authCompany:state.authCompany.company,
   errors: state.errors
 });
 

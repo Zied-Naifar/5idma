@@ -94,7 +94,7 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
 // @route   POST api/StudentProfile
 // @desc    Create or Edit students profile
 // @access  Private
-router.post('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
 
     const { errors, isValid } = validateStudentProfileInput(req.body)
 
@@ -106,8 +106,7 @@ router.post('/:id', passport.authenticate('jwt', { session: false }), (req, res)
 
     // GEt fields
     const profileFields = {};
-    console.log(req.params.id)
-    profileFields.student = req.params.id;
+    profileFields.student = req.body.id;
     if(req.body.handle) profileFields.handle = req.body.handle;
     if(req.body.university) profileFields.university = req.body.university;
     if(req.body.website) profileFields.website = req.body.website;

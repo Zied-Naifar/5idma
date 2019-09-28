@@ -29,10 +29,9 @@ export const setProfileStudentLoading = () => {
     };
   };
  // Create Profile
-export const createProfileStudent = (profileStudentData, history, id) => dispatch => {
-  console.log('action'+id)
+export const createProfileStudent = (profileStudentData, history) => dispatch => {
   axios
-    .post(`/api/studentprofile/${id}`, profileStudentData)
+    .post('/api/studentprofile', profileStudentData)
     .then(res => history.push('/dashboard'))
     .catch(err =>
       dispatch({

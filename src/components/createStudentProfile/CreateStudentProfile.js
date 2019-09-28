@@ -31,8 +31,8 @@ import { createProfileStudent } from '../../actions/profileStudent';
       youtube: '',
       instagram: '',
      };
-     this.onChange = this.onChange.bind(this);
-     this.onSubmit = this.onSubmit.bind(this);
+      
+      ;
  
   }
   componentWillReceiveProps(nextProps) {
@@ -42,9 +42,10 @@ import { createProfileStudent } from '../../actions/profileStudent';
   }
 
 
-  onSubmit(e) {
+  onSubmit=(e)=> {
     e.preventDefault();
     const profileStudentData = {
+      id:this.props.auth.id,
       handle: this.state.handle,
       society: this.state.society,
       website: this.state.website,
@@ -59,9 +60,9 @@ import { createProfileStudent } from '../../actions/profileStudent';
       youtube: this.state.youtube,
       instagram: this.state.instagram
     };
-    this.props.createProfileStudent(profileStudentData,this.props.history,this.props.auth.student.id);
+    this.props.createProfileStudent(profileStudentData,this.props.history);
   }
-  onChange(e) {
+  onChange=(e)=> {
     this.setState({ [e.target.name]: e.target.value });
   }
 
@@ -233,7 +234,7 @@ CreateProfileStudent.propTypes = {
 };
 const mapStateToProps = state => ({
     profileStudent: state.profileStudent,
-    auth: state.auth,
+    auth: state.auth.student,
     errors: state.errors
   });
   

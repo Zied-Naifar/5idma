@@ -28,7 +28,7 @@ import isEmpty from '../../validation/is-empty';
                   <a
                     className="text-white p-2"
                     href={profileCompany.website}
-                    target="_blank"
+                    target="_blank" rel="noopener noreferrer"
                   >
                     <i className="fas fa-globe fa-2x" />
                   </a>
@@ -38,7 +38,7 @@ import isEmpty from '../../validation/is-empty';
                   <a
                     className="text-white p-2"
                     href={profileCompany.social.twitter}
-                    target="_blank"
+                    target="_blank" rel="noopener noreferrer"
                   >
                     <i className="fab fa-twitter fa-2x" />
                   </a>
@@ -48,7 +48,7 @@ import isEmpty from '../../validation/is-empty';
                   <a
                     className="text-white p-2"
                     href={profileCompany.social.facebook}
-                    target="_blank"
+                    target="_blank" rel="noopener noreferrer"
                   >
                     <i className="fab fa-facebook fa-2x" />
                   </a>
@@ -58,7 +58,7 @@ import isEmpty from '../../validation/is-empty';
                   <a
                     className="text-white p-2"
                     href={profileCompany.social.linkedin}
-                    target="_blank"
+                    target="_blank" rel="noopener noreferrer"
                   >
                     <i className="fab fa-linkedin fa-2x" />
                   </a>
@@ -68,7 +68,7 @@ import isEmpty from '../../validation/is-empty';
                   <a
                     className="text-white p-2"
                     href={profileCompany.social.youtube}
-                    target="_blank"
+                    target="_blank" rel="noopener noreferrer"
                   >
                     <i className="fab fa-youtube fa-2x" />
                   </a>
@@ -78,7 +78,7 @@ import isEmpty from '../../validation/is-empty';
                   <a
                     className="text-white p-2"
                     href={profileCompany.social.instagram}
-                    target="_blank"
+                    target="_blank" rel="noopener noreferrer"
                   >
                     <i className="fab fa-instagram fa-2x" />
                   </a>

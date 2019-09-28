@@ -24,7 +24,7 @@ var mongoDB = 'mongodb://127.0.0.1/my_database';
 
 //Connect to Mongodb
 mongoose
-    .connect(mongoDB, { useNewUrlParser: true })
+    .connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB Connected'))
     .catch(err  => console.log(err));
 

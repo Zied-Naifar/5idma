@@ -1,24 +1,24 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import { connect } from "react-redux";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import { OutlinedButtons } from "./jobOffer";
-import BookmarkBorder from "@material-ui/icons/BookmarkBorder";
-import Button from "@material-ui/core/Button";
-import Avatar from "@material-ui/core/Avatar";
-import axios from "axios";
-import { getStudentProfiles } from "../actions/profileStudent";
-import { Link } from "react-router-dom";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import { OutlinedButtons } from './jobOffer';
+import BookmarkBorder from '@material-ui/icons/BookmarkBorder';
+import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
+import axios from 'axios';
+import { getStudentProfiles } from '../actions/profileStudent';
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
   avatar: {
     border: 1,
-    borderColor: "lightgrey",
-    borderStyle: "solid",
+    borderColor: 'lightgrey',
+    borderStyle: 'solid',
     width: 90,
     height: 90,
     marginRight: 10
@@ -42,12 +42,14 @@ class JobPresentation extends React.Component {
   render() {
     const props = this.props;
     const { classes, offer, companyProfile } = props;
-    const { isAuthenticated, student } = this.props.auth;
-    const { isTestify, admin } = this.props.authAdmin;
-    return !(this.props.profileStudent && this.props.profileStudent.profilesStudent) ? (
-      "Loading"
+    const { isAuthenticated } = this.props.auth;
+    const { isTestify } = this.props.authAdmin;
+    return !(
+      this.props.profileStudent && this.props.profileStudent.profilesStudent
+    ) ? (
+      'Loading'
     ) : !(offer && companyProfile) ? (
-      "Loading"
+      'Loading'
     ) : (
       <Card className="job-presentation-card">
         <div className="job-presentation">
@@ -74,7 +76,7 @@ class JobPresentation extends React.Component {
                 <p className="text-muted info-title">Durée</p>
               </div>
               <div className="offer-card-info">
-                <h6>{offer.pay + " TND"}</h6>
+                <h6>{offer.pay + ' TND'}</h6>
                 <p className="text-muted info-title">Salaire</p>
               </div>
               <div className="offer-card-info">
@@ -105,7 +107,7 @@ class JobPresentation extends React.Component {
                   </IconButton>
                 </div>
               ) : (
-                ""
+                ''
               )}
               {isAuthenticated ? (
                 <Button
@@ -117,18 +119,20 @@ class JobPresentation extends React.Component {
                   Postuler
                 </Button>
               ) : (
-                ""
+                ''
               )}
               {isTestify ? (
                 <div>
                   {offer.candidate[0] ? (
                     offer.candidate
                       .map(el => {
-                          return this.props.profileStudent.profilesStudent.find(
-                            element => (element.student)? (element.student._id === el._id) : ""
-                          )
-                        }
-                      )
+                        return this.props.profileStudent.profilesStudent.find(
+                          element =>
+                            element.student
+                              ? element.student._id === el._id
+                              : ''
+                        );
+                      })
                       .map((el, i) => (
                         <Button
                           component={Link}
@@ -143,7 +147,7 @@ class JobPresentation extends React.Component {
                   )}
                 </div>
               ) : (
-                ""
+                ''
               )}
             </div>
           </CardContent>
@@ -164,6 +168,7 @@ class JobPresentation extends React.Component {
                   className="card-company-presentation-info"
                   href={companyProfile.website}
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Website
                 </a>
@@ -174,45 +179,55 @@ class JobPresentation extends React.Component {
                   {companyProfile.company.adress}
                 </p>
                 <div>
-                  {companyProfile.social
-                    ? (Boolean(companyProfile.social.facebook) ? (
-                        <a
-                          href={companyProfile.social.facebook}
-                          target="_blank"
-                        >
-                          <img src="https://img.icons8.com/material/24/000000/facebook.png" />
-                        </a>
-                      ) : (
-                        ""
-                      ),
-                      Boolean(companyProfile.social.twitter) ? (
-                        <a href={companyProfile.social.twitter} target="_blank">
-                          <img src="https://img.icons8.com/material/24/000000/twitter.png" />
-                        </a>
-                      ) : (
-                        ""
-                      ),
-                      Boolean(companyProfile.social.instagram) ? (
-                        <a
-                          href={companyProfile.social.instagram}
-                          target="_blank"
-                        >
-                          <img src="https://img.icons8.com/material/24/000000/instagram-new.png" />
-                        </a>
-                      ) : (
-                        ""
-                      ),
-                      Boolean(companyProfile.social.linkedin) ? (
-                        <a
-                          href={companyProfile.social.linkedin}
-                          target="_blank"
-                        >
-                          <img src="https://img.icons8.com/material/24/000000/linkedin.png" />
-                        </a>
-                      ) : (
-                        ""
-                      ))
-                    : ""}
+                  {companyProfile.social &&
+                    (Boolean(companyProfile.social.facebook) && (
+                      <a
+                        href={companyProfile.social.facebook}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <img
+                          src="https://img.icons8.com/material/24/000000/facebook.png"
+                          alt="facebook"
+                        />
+                      </a>
+                    ),
+                    Boolean(companyProfile.social.twitter) && (
+                      <a
+                        href={companyProfile.social.twitter}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <img
+                          src="https://img.icons8.com/material/24/000000/twitter.png"
+                          alt="twitter"
+                        />
+                      </a>
+                    ),
+                    Boolean(companyProfile.social.instagram) && (
+                      <a
+                        href={companyProfile.social.instagram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <img
+                          src="https://img.icons8.com/material/24/000000/instagram-new.png"
+                          alt="instagram"
+                        />
+                      </a>
+                    ),
+                    Boolean(companyProfile.social.linkedin) && (
+                      <a
+                        href={companyProfile.social.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <img
+                          src="https://img.icons8.com/material/24/000000/linkedin.png"
+                          alt="linkedin"
+                        />
+                      </a>
+                    ))}
                 </div>
               </div>
             </div>
@@ -247,7 +262,9 @@ const mapStateToProps = (state, { id }) => {
     authAdmin: state.authAdmin,
     companyProfile:
       offer &&
-      state.companiesReducer.find(el => (el.company) ? (el.company.name === offer.company.name): ""),
+      state.companiesReducer.find(el =>
+        el.company ? el.company.name === offer.company.name : ''
+      ),
     profileStudent: state.profileStudent
   };
 };
@@ -257,4 +274,4 @@ const ConnectedJobPresentation = connect(
   mapDispatchToProps
 )(JobPresentation);
 
-export default (JobPresentation = withStyles(styles)(ConnectedJobPresentation));
+export default JobPresentation = withStyles(styles)(ConnectedJobPresentation);

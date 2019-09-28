@@ -12,8 +12,8 @@ class LoginCompany extends Component {
             password:'',
             errors:{}
         };
-        this.onChange=this.onChange.bind(this);
-        this.onSubmit=this.onSubmit.bind(this);
+         
+         
     }
     componentDidMount(){
       if (this.props.authCompany.isAuthorize) {
@@ -30,7 +30,7 @@ class LoginCompany extends Component {
             this.setState({ errors: nextProps.errors });
           }
         }
-        onSubmit(e){
+        onSubmit=(e)=>{
           e.preventDefault();
          
           const companyData={
@@ -41,7 +41,7 @@ class LoginCompany extends Component {
           }
            this.props.loginCompany(companyData);
       }
-    onChange(e){this.setState({[e.target.name]:e.target.value})}
+    onChange=(e)=>{this.setState({[e.target.name]:e.target.value})}
   render() {
     const {errors}=this.state;
     return (

@@ -1,31 +1,28 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import { connect } from "react-redux";
-import TextFieldGroup from "../common/TextFieldGroup";
-import { registerCompany } from "../../actions/authCompanyAction";
+import { connect } from 'react-redux';
+import TextFieldGroup from '../common/TextFieldGroup';
+import { registerCompany } from '../../actions/authCompanyAction';
 class RegisterCompany extends Component {
   constructor() {
     super();
     this.state = {
-      name: "",
-      email: "",
-      address: "",
-      phoneNumber: "",
-      password: "",
-      password2: "",
-
+      name: '',
+      email: '',
+      address: '',
+      phoneNumber: '',
+      password: '',
+      password2: '',
       errors: {}
     };
-
-    this.onSubmit = this.onSubmit.bind(this);
   }
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
-  onSubmit(e) {
+  onSubmit = e => {
     e.preventDefault();
 
     const newCompany = {
@@ -41,7 +38,7 @@ class RegisterCompany extends Component {
     // .then(res=>console.log(res.data))
     // .catch(err=>this.setState({errors:err.response.data}))
     this.props.registerCompany(newCompany, this.props.history);
-  }
+  };
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });

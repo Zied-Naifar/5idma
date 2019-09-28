@@ -74,7 +74,7 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
 // @route   POST api/CompanyProfile
 // @desc    Create or Edit company profile
 // @access  Private
-router.post('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
 
     const { errors, isValid } = validateCompanyProfileInput(req.body)
 
@@ -86,7 +86,7 @@ router.post('/:id', passport.authenticate('jwt', { session: false }), (req, res)
 
     // GEt fields
     const profileFields = {};
-    profileFields.company = req.params.id;
+    profileFields.company = req.body.id;
     if(req.body.handle) profileFields.handle = req.body.handle;
     if(req.body.website) profileFields.website = req.body.website;
     if(req.body.location) profileFields.location = req.body.location;

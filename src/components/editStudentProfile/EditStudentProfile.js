@@ -31,8 +31,8 @@ import { createProfileStudent ,getCurrentProfileStudent} from '../../actions/pro
       youtube: '',
       instagram: '',
      };
-     this.onChange = this.onChange.bind(this);
-     this.onSubmit = this.onSubmit.bind(this);
+      
+      ;
  
   }
   componentDidMount (){
@@ -91,7 +91,7 @@ import { createProfileStudent ,getCurrentProfileStudent} from '../../actions/pro
 
     }
   }
-  onSubmit(e) {
+  onSubmit=(e)=> {
     e.preventDefault();
     const profileStudentData = {
       handle: this.state.handle,
@@ -110,7 +110,7 @@ import { createProfileStudent ,getCurrentProfileStudent} from '../../actions/pro
     };
     this.props.createProfileStudent(profileStudentData, this.props.history)
   }
-  onChange(e) {
+  onChange=(e)=> {
     this.setState({ [e.target.name]: e.target.value });
   }
 
