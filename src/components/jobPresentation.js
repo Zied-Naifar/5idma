@@ -85,7 +85,7 @@ class JobPresentation extends React.Component {
               </div>
             </div>
             <Typography component="p" className="job-presentation-section">
-              <Typography>Description :</Typography>
+              Description :
               <br />
               {offer.description}
             </Typography>
@@ -234,9 +234,7 @@ class JobPresentation extends React.Component {
           </div>
           <Typography>
             <br />
-            <Typography variant="h6" component="h6">
               Description :
-            </Typography>
             <br />
             {companyProfile.description}
           </Typography>

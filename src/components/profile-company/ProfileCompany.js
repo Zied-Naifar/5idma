@@ -5,16 +5,10 @@ import React, { Component } from 'react'
 import Spinner from '../common/Spinner';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import {getCompanyProfileByHandle} from '../../actions/profileCompanyAction'
+// import { Link } from 'react-router-dom';
+import {getCurrentProfileCompany} from '../../actions/profileCompanyAction'
 
  class ProfileCompany extends Component {
-
-  componentDidMount() {
-    if (this.props.match.params.handle) {
-      this.props.getCompanyProfileByHandle(this.props.match.params.handle);
-    }
-  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.profileCompany === null && this.props.profileCompany.loading) {
@@ -32,11 +26,11 @@ import {getCompanyProfileByHandle} from '../../actions/profileCompanyAction'
       profileCompanyContent = (
         <div>
           <div className="row">
-            <div className="col-md-6">
+            {/* <div className="col-md-6">
               <Link to="/profiles-company" className="btn btn-light mb-3 float-left">
                 Back To Profiles
               </Link>
-            </div>
+            </div> */}
             <div className="col-md-6" />
           </div>
           <ProfileCompanyHeader profileCompany={profileCompany} />
@@ -61,11 +55,11 @@ import {getCompanyProfileByHandle} from '../../actions/profileCompanyAction'
   }
 }
 ProfileCompany.propTypes = {
-  getCompanyProfileByHandle: PropTypes.func.isRequired,
+  getCurrentProfileCompany: PropTypes.func.isRequired,
   profileCompany: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  profileCompany: state.profileCompany
-});
-export default connect(mapStateToProps, {getCompanyProfileByHandle})(ProfileCompany);
+  profileCompany: state.profileCompany,
+  });
+export default connect(mapStateToProps, {getCurrentProfileCompany})(ProfileCompany);

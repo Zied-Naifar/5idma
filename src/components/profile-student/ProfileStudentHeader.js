@@ -10,7 +10,7 @@ import isEmpty from '../../validation/is-empty';
         <div className="row">
        
          <div className="col-md-12">
-          <div className="card card-body bg-info text-white mb-3">
+          <div className="card card-body text-white mb-3">
             <div className="row">
               <div className="col-4 col-md-3 m-auto">
                 <img

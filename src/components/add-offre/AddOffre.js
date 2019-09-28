@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import { connect } from 'react-redux';
@@ -15,18 +15,14 @@ class AddOffre extends Component {
       position: '',
       duration: '',
       pay: '',
-      field:'',
-      date:'',
+      field: '',
+      date: '',
       description: '',
-      skills:'',
-      startDate:'',
+      skills: '',
+      startDate: '',
       errors: {},
       disabled: false
     };
-
-     
-     ;
-     
   }
 
   componentWillReceiveProps(nextProps) {
@@ -35,40 +31,39 @@ class AddOffre extends Component {
     }
   }
 
-  onSubmit=(e)=> {
+  onSubmit = e => {
     e.preventDefault();
 
     const offreData = {
+      id: this.props.currentCompany,
       handle: this.state.handle,
       location: this.state.location,
       position: this.state.position,
       duration: this.state.duration,
       pay: this.state.pay,
-      field:this.state.field,
-      date:this.state.date,
+      field: this.state.field,
+      date: this.state.date,
       description: this.state.description,
-      skills:this.state.skills,
-      startDate:this.state.startDate,
-    
+      skills: this.state.skills,
+      startDate: this.state.startDate
     };
 
     this.props.addOffre(offreData, this.props.history);
-  }
+  };
 
-  onChange=(e)=> {
+  onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-  }
+  };
 
-  onCheck=(e)=> {
+  onCheck = e => {
     this.setState({
       disabled: !this.state.disabled,
       current: !this.state.current
     });
-  }
+  };
 
   render() {
     const { errors } = this.state;
-
     return (
       <div className="add-experience">
         <div className="container">
@@ -78,7 +73,7 @@ class AddOffre extends Component {
                 Go Back
               </Link>
               <h1 className="display-4 text-center">Add Offre</h1>
-              
+
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
@@ -102,16 +97,16 @@ class AddOffre extends Component {
                   onChange={this.onChange}
                   error={errors.location}
                 />
-                 <TextFieldGroup
+                <TextFieldGroup
                   placeholder="Description"
                   name="description"
                   value={this.state.description}
                   onChange={this.onChange}
                   error={errors.description}
                 />
-                
+
                 <TextFieldGroup
-                 placeholder="Start date"
+                  placeholder="Start date"
                   name="startDate"
                   type="date"
                   value={this.state.startDate}
@@ -125,7 +120,7 @@ class AddOffre extends Component {
                   onChange={this.onChange}
                   error={errors.duration}
                 />
-               
+
                 <TextAreaFieldGroup
                   placeholder="Pay"
                   name="pay"
@@ -133,14 +128,14 @@ class AddOffre extends Component {
                   onChange={this.onChange}
                   error={errors.pay}
                 />
-                 <TextAreaFieldGroup
+                <TextAreaFieldGroup
                   placeholder="Field"
                   name="field"
                   value={this.state.field}
                   onChange={this.onChange}
                   error={errors.field}
                 />
-                 <TextAreaFieldGroup
+                <TextAreaFieldGroup
                   placeholder="Skills"
                   name="skills"
                   value={this.state.skills}
@@ -162,16 +157,16 @@ class AddOffre extends Component {
 }
 
 AddOffre.propTypes = {
-  AddOffre: PropTypes.func.isRequired,
-  profileCompony: PropTypes.object.isRequired,
+  // AddOffre: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  profileCompony: state.profileCompony,
+  currentCompany:state.authCompany.company.id,  
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { addOffre })(
-  withRouter(AddOffre)
-);
+export default connect(
+  mapStateToProps,
+  { addOffre }
+)(AddOffre);

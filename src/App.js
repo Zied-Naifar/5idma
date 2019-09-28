@@ -22,7 +22,7 @@ import EditStudentProfile from './components/editStudentProfile/EditStudentProfi
 import AddExperience from './components/add-credentials/AddExperience';
 import AddEducation from './components/add-credentials/AddEducation';
 import ProfilesStudent from './components/profiles-student/ProfilesStudent';
-import ProfileStudent from './components/profile-student/ProfileStudent';
+// import ProfileStudent from './components/profile-student/ProfileStudent';
 import CreateCompanyProfile from './components/createCompanyProfile/CreateCompanyProfile';
 import AddOffre from './components/add-offre/AddOffre';
 
@@ -34,7 +34,7 @@ import { fetchOffers, fetchCompanies } from './actions/actions';
 
 import ProfilesCompany from './components/profiles-company/ProfilesCompany';
 import EditCompanyProfile from './components/editCompanyProfile/EditCompanyProfile';
-import ProfileCompany from './components/profile-company/ProfileCompany';
+// import ProfileCompany from './components/profile-company/ProfileCompany';
 
 import RegisterAdmin from './components/auth/RegisterAdmin';
 import LoginAdmin from './components/auth/LoginAdmin';
@@ -107,11 +107,11 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/loginCompany" component={LoginCompany} />
-            <Route
+            {/* <Route
               exact
               path="/studentprofile/:handle"
               component={ProfileStudent}
-            />
+            /> */}
             <Route
               exact
               path="/job-offers/:id"
@@ -178,11 +178,11 @@ class App extends Component {
                 component={EditCompanyProfile}
               />
             </Switch>
-            <Route
+            {/* <Route
               exact
               path="/companyprofile/:handle"
               component={ProfileCompany}
-            />
+            /> */}
             <Switch>
               <PrivateRouteAdmin
                 exact
@@ -229,18 +229,18 @@ class App extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  fetchOffers: () => {
-    dispatch(fetchOffers());
-  },
-  fetchCompanies: () => {
-    dispatch(fetchCompanies());
-  }
-});
+// const mapDispatchToProps = dispatch => ({
+//   fetchOffers: () => {
+//     dispatch(fetchOffers());
+//   },
+//   fetchCompanies: () => {
+//     dispatch(fetchCompanies());
+//   }
+// });
 
 const ConnectedApp = connect(
   null,
-  mapDispatchToProps
+  {fetchOffers, fetchCompanies}
 )(App);
 
 export default ConnectedApp;

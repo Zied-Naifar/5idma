@@ -1,14 +1,13 @@
 import React from 'react';
-import spinner from './spinner.gif';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-export default () => {
+export default function CircularUnderLoad() {
   return (
-    <div>
-      <img
-        src={spinner}
-        style={{ width: '200px', margin: 'auto', display: 'block' }}
-        alt="Loading..."
-      />
-    </div>
+    <CircularProgress
+      style={{ color: '#079681'}}
+      size={100}
+      thickness={3}
+      disableShrink
+    />
   );
-};
+}

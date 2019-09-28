@@ -1,82 +1,85 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loginCompany} from '../../actions/authCompanyAction';
-import TextFieldGroup from '../common/TextFieldGroup'
+import { loginCompany } from '../../actions/authCompanyAction';
+import TextFieldGroup from '../common/TextFieldGroup';
 class LoginCompany extends Component {
-    constructor(){
-        super();
-        this.state={
-            email:'',
-           
-            password:'',
-            errors:{}
-        };
-         
-         
-    }
-    componentDidMount(){
-      if (this.props.authCompany.isAuthorize) {
-        this.props.history.push('/dashboardCompany');
-      }
-    }
-    
-   componentWillReceiveProps(nextProps) {
-          if (nextProps.authCompany.isAuthorize) {
-            this.props.history.push('/dashboardCompany');
-          }
-      
-          if (nextProps.errors) {
-            this.setState({ errors: nextProps.errors });
-          }
-        }
-        onSubmit=(e)=>{
-          e.preventDefault();
-         
-          const companyData={
-             
-              email:this.state.email,
-            
-              password:this.state.password
-          }
-           this.props.loginCompany(companyData);
-      }
-    onChange=(e)=>{this.setState({[e.target.name]:e.target.value})}
+  constructor() {
+    super();
+    this.state = {
+      email: '',
+      password: '',
+      errors: {},
+      logged: false
+    };
+  }
+  // componentDidMount() {
+  //   if (this.props.authCompany.isAuthorize) {
+  //     this.props.history.push('/dashboardCompany');
+  //   }
+  // }
+
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.authCompany.isAuthorize) {
+  //     this.props.history.push('/dashboardCompany');
+  //   }
+
+  //   if (nextProps.errors) {
+  //     this.setState({ errors: nextProps.errors });
+  //   }
+  // }
+
+  onSubmit = e => {
+    e.preventDefault();
+
+    const companyData = {
+      email: this.state.email,
+      password: this.state.password
+    };
+    this.props.loginCompany(companyData);
+  };
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
   render() {
-    const {errors}=this.state;
-    return (
-        <div className="login">
+    const { errors } = this.state;
+    return this.props.authCompany.isAuthorize ? (
+      <Redirect to="/dashboardCompany" />
+    ) : (
+      <div className="login">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Log In</h1>
-              <p className="lead text-center">Sign in to your entreprise account</p>
+              <p className="lead text-center">
+                Sign in to your entreprise account
+              </p>
               <form noValidate onSubmit={this.onSubmit}>
-              <TextFieldGroup
-              placeholder = "Email address"
-              name = "email"
-              type = "email"
-              value={this.state.email}
-              onChange={this.onChange}
-              error={errors.email}
-              />
-               <TextFieldGroup
-              placeholder = "Password"
-              name = "password"
-              type = "password"
-              value={this.state.password}
-              onChange={this.onChange}
-              error={errors.password}
-              />
-               
-               
+                <TextFieldGroup
+                  placeholder="Email address"
+                  name="email"
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.onChange}
+                  error={errors.email}
+                />
+                <TextFieldGroup
+                  placeholder="Password"
+                  name="password"
+                  type="password"
+                  value={this.state.password}
+                  onChange={this.onChange}
+                  error={errors.password}
+                />
+
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>
             </div>
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 LoginCompany.propTypes = {
@@ -88,7 +91,7 @@ const mapStateToProps = state => ({
   authCompany: state.authCompany,
   errors: state.errors
 });
-export default connect(mapStateToProps, { loginCompany }) (LoginCompany);
-
-
-
+export default connect(
+  mapStateToProps,
+  { loginCompany }
+)(LoginCompany);

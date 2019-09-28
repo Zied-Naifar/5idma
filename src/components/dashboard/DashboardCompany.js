@@ -8,10 +8,12 @@ import {
 } from '../../actions/profileCompanyAction';
 import Spinner from '../common/Spinner';
 import ProfileCompanyActions from './ProfileCompanyAction';
+import ProfileCompany from '../profile-company/ProfileCompany';
+
 //import Offre from './Offre';
 class DashboardCompany extends Component {
   componentWillMount() {
-    this.props.getCurrentProfileCompany();
+    this.props.getCurrentProfileCompany(this.props.authCompany.company.id);
   }
   onDeleteClick = e => {
     this.props.deleteCompanyAccount();
@@ -30,19 +32,16 @@ class DashboardCompany extends Component {
         dashboardCompanyContent = (
           <div>
             <p className="lead text-muted">
-              Welcome
-              <Link to={`/companyprofile/${profileCompany.handle}`}>
-                {company.name}
-              </Link>
+              {`Welcome ${company.name.toUpperCase()}`}
             </p>
             <ProfileCompanyActions />
-
+            <ProfileCompany />
             {/* <Offre offre ={profileCompany.offre}/> */}
 
-            <div style={{ marginBottom: '60px' }} />
             <button
               onClick={() => this.onDeleteClick()}
               className="btn btn-danger"
+              style={{ margin: '20px 10px 60px' }}
             >
               Delete Account
             </button>
@@ -86,7 +85,8 @@ DashboardCompany.propTypes = {
 
 const mapStateToProps = state => ({
   profileCompany: state.profileCompany,
-  authCompany: state.authCompany
+  authCompany: state.authCompany,
+  jobOffers: state.offersReducer
 });
 
 export default connect(

@@ -1,63 +1,71 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter,Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import InputGroup from '../common/InputGroup';
 //import SelectListGroup from '../common/SelectListGroup';
- import PropTypes from 'prop-types';
-import isEmpty from '../../validation/is-empty'
+import PropTypes from 'prop-types';
+import isEmpty from '../../validation/is-empty';
 
-import { createProfileStudent ,getCurrentProfileStudent} from '../../actions/profileStudent';
+import {
+  createProfileStudent,
+  getCurrentProfileStudent
+} from '../../actions/profileStudent';
 
- class CreateProfileStudent extends Component {
+class CreateProfileStudent extends Component {
   constructor(props) {
-     super(props);
-     this.state = {
-       displaySocialInputs: false,
-       handle: '',
-       society: '',
-       website: '',
-       location: '',
-       status: '',
-       skills: '',
-       githubusername: '',
-       bio: '',
- 
-       errors: {},
-       twitter: '',
+    super(props);
+    this.state = {
+      displaySocialInputs: false,
+      handle: '',
+      society: '',
+      website: '',
+      location: '',
+      status: '',
+      skills: '',
+      githubusername: '',
+      bio: '',
+      errors: {},
+      twitter: '',
       facebook: '',
       linkedin: '',
       youtube: '',
-      instagram: '',
-     };
-      
-      ;
- 
+      instagram: ''
+    };
   }
-  componentDidMount (){
-      this.props.getCurrentProfileStudent();
-      
+  componentDidMount() {
+    this.props.getCurrentProfileStudent(this.props.id);
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
-    if(nextProps.profileStudent.profileStudent){
-        const profileStudent = nextProps.profileStudent 
-       // bring skills array back to csv
+    if (nextProps.profileStudent.profileStudent) {
+      const profileStudent = nextProps.profileStudent;
+      // bring skills array back to csv
       const skillsCSV = profileStudent.profileStudent.skills.join(',');
-        // If profile field doesnt exist, make empty string
-        console.log(profileStudent.profileStudent.skills.join(','))
-       
-        profileStudent.society = !isEmpty(profileStudent.society) ? profileStudent.society : '';
-      profileStudent.website = !isEmpty(profileStudent.website) ? profileStudent.website : '';
-      profileStudent.location = !isEmpty(profileStudent.location) ? profileStudent.location : '';
+      // If profile field doesnt exist, make empty string
+      console.log(profileStudent.profileStudent.skills.join(','));
+
+      profileStudent.society = !isEmpty(profileStudent.society)
+        ? profileStudent.society
+        : '';
+      profileStudent.website = !isEmpty(profileStudent.website)
+        ? profileStudent.website
+        : '';
+      profileStudent.location = !isEmpty(profileStudent.location)
+        ? profileStudent.location
+        : '';
       profileStudent.githubusername = !isEmpty(profileStudent.githubusername)
         ? profileStudent.githubusername
         : '';
-      profileStudent.bio = !isEmpty(profileStudent.bio) ? profileStudent.bio : '';
-      profileStudent.social = !isEmpty(profileStudent.social) ? profileStudent.social : {};
+      profileStudent.bio = !isEmpty(profileStudent.bio)
+        ? profileStudent.bio
+        : '';
+      profileStudent.social = !isEmpty(profileStudent.social)
+        ? profileStudent.social
+        : {};
       profileStudent.twitter = !isEmpty(profileStudent.social.twitter)
         ? profileStudent.social.twitter
         : '';
@@ -73,25 +81,24 @@ import { createProfileStudent ,getCurrentProfileStudent} from '../../actions/pro
       profileStudent.instagram = !isEmpty(profileStudent.social.instagram)
         ? profileStudent.social.instagram
         : '';
- // Set component fields state
- this.setState({
-    handle: profileStudent.profileStudent.handle,
-    society: profileStudent.profileStudent.society,
-    website: profileStudent.profileStudent.website,
-    location: profileStudent.profileStudent.location,
-    status: profileStudent.profileStudent.status,
-    skills:skillsCSV ,
-    githubusername: profileStudent.profileStudent.githubusername,
-    bio: profileStudent.profileStudent.bio,
-    twitter: profileStudent.profileStudent.twitter,
-    facebook: profileStudent.profileStudent.facebook,
-    linkedin: profileStudent.profileStudent.linkedin,
-    youtube: profileStudent.profileStudent.youtube
-  });
-
+      // Set component fields state
+      this.setState({
+        handle: profileStudent.profileStudent.handle,
+        society: profileStudent.profileStudent.society,
+        website: profileStudent.profileStudent.website,
+        location: profileStudent.profileStudent.location,
+        status: profileStudent.profileStudent.status,
+        skills: skillsCSV,
+        githubusername: profileStudent.profileStudent.githubusername,
+        bio: profileStudent.profileStudent.bio,
+        twitter: profileStudent.profileStudent.twitter,
+        facebook: profileStudent.profileStudent.facebook,
+        linkedin: profileStudent.profileStudent.linkedin,
+        youtube: profileStudent.profileStudent.youtube
+      });
     }
   }
-  onSubmit=(e)=> {
+  onSubmit = e => {
     e.preventDefault();
     const profileStudentData = {
       handle: this.state.handle,
@@ -108,13 +115,13 @@ import { createProfileStudent ,getCurrentProfileStudent} from '../../actions/pro
       youtube: this.state.youtube,
       instagram: this.state.instagram
     };
-    this.props.createProfileStudent(profileStudentData, this.props.history)
-  }
-  onChange=(e)=> {
+    this.props.createProfileStudent(profileStudentData, this.props.history);
+  };
+  onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-  }
+  };
 
-   render() {
+  render() {
     const { errors, displaySocialInputs } = this.state;
     let socialInputs;
 
@@ -172,11 +179,11 @@ import { createProfileStudent ,getCurrentProfileStudent} from '../../actions/pro
       <div className="create-profile">
         <div className="container">
           <div className="row">
-             <div className="col-md-8 m-auto">
-             <Link to="/dashboard" className="btn btn-light">
+            <div className="col-md-8 m-auto">
+              <Link to="/dashboard" className="btn btn-light">
                 Go Back
               </Link>
-               <h1 className="display-4 text-center">Edit Your Profile</h1>
+              <h1 className="display-4 text-center">Edit Your Profile</h1>
               <p className="lead text-center">
                 Let's get some information to make your profile stand out
               </p>
@@ -190,7 +197,7 @@ import { createProfileStudent ,getCurrentProfileStudent} from '../../actions/pro
                   error={errors.handle}
                   info="A unique handle for your profile URL. Your full name, company name, nickname"
                 />
-               
+
                 <TextFieldGroup
                   placeholder="society"
                   name="society"
@@ -199,13 +206,12 @@ import { createProfileStudent ,getCurrentProfileStudent} from '../../actions/pro
                   error={errors.society}
                   info="Could be your own company or one you work for"
                 />
-                 <TextFieldGroup
+                <TextFieldGroup
                   placeholder="* status"
                   name="status"
                   value={this.state.status}
                   onChange={this.onChange}
                   error={errors.status}
-                  
                 />
                 <TextFieldGroup
                   placeholder="Website"
@@ -270,29 +276,27 @@ import { createProfileStudent ,getCurrentProfileStudent} from '../../actions/pro
                   className="btn btn-info btn-block mt-4"
                 />
               </form>
-             </div>
+            </div>
           </div>
         </div>
       </div>
-   );
-   }
- }
+    );
+  }
+}
 
 CreateProfileStudent.propTypes = {
-   profileStudent: PropTypes.object.isRequired,
-   getCurrentProfileStudent:PropTypes.func.isRequired,
-   createProfileStudent :PropTypes.func.isRequired,
+  profileStudent: PropTypes.object.isRequired,
+  getCurrentProfileStudent: PropTypes.func.isRequired,
+  createProfileStudent: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
-    profileStudent: state.profileStudent,
-    errors: state.errors
-  });
-  
- 
+  profileStudent: state.profileStudent,
+  errors: state.errors,
+  id: state.auth.student.id
+});
 
-
- 
- export default connect(mapStateToProps, { createProfileStudent,getCurrentProfileStudent })(
-  withRouter(CreateProfileStudent)
-);
+export default connect(
+  mapStateToProps,
+  { createProfileStudent, getCurrentProfileStudent }
+)(withRouter(CreateProfileStudent));

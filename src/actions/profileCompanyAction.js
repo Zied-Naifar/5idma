@@ -9,11 +9,11 @@ import {
   SET_CURRENT_COMPANY
 } from "./types";
 
-// get current student profile
-export const getCurrentProfileCompany = () => dispatch => {
+// get current company profile
+export const getCurrentProfileCompany = (id) => dispatch => {
   dispatch(setProfileCompanyLoading());
   axios
-    .get("/api/companyprofile")
+    .get(`/api/companyprofile/${id}`)
     .then(res =>
       dispatch({
         type: GET_PROFILE_COMPANY,
@@ -56,23 +56,23 @@ export const createProfileCompany = (
     );
 };
 // Get profile by handle
-export const getCompanyProfileByHandle = handle => dispatch => {
-  dispatch(setProfileCompanyLoading());
-  axios
-    .get(`/api/companyprofile/handle/${handle}`)
-    .then(res =>
-      dispatch({
-        type: GET_PROFILE_COMPANY,
-        payload: res.data
-      })
-    )
-    .catch(err =>
-      dispatch({
-        type: GET_PROFILE_COMPANY,
-        payload: null
-      })
-    );
-};
+// export const getCompanyProfileByHandle = handle => dispatch => {
+//   dispatch(setProfileCompanyLoading());
+//   axios
+//     .get(`/api/studentprofile/handle/${handle}`)
+//     .then(res =>
+//       dispatch({
+//         type: GET_PROFILE_COMPANY,
+//         payload: res.data
+//       })
+//     )
+//     .catch(err =>
+//       dispatch({
+//         type: GET_PROFILE_COMPANY,
+//         payload: null
+//       })
+//     );
+// };
 // Add offre
 export const addOffre = (offreData, history) => dispatch => {
   axios

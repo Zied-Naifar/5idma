@@ -34,7 +34,7 @@ class CreateCompanyProfile extends Component {
   onSubmit=(e)=> {
     e.preventDefault();
     const profileCompanyData = {
-      id: this.state.authCompany.id,
+      id: this.props.authCompany.id,
       handle: this.state.handle,
       description: this.state.description,
       category: this.state.category,

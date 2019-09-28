@@ -1,92 +1,92 @@
-import React from "react";
-import PropTypes from "prop-types";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import InputBase from "@material-ui/core/InputBase";
-import Badge from "@material-ui/core/Badge";
-import Button from "@material-ui/core/Button";
-import MenuItem from "@material-ui/core/MenuItem";
-import { fade } from "@material-ui/core/styles/colorManipulator";
-import { withStyles } from "@material-ui/core/styles";
-import SearchIcon from "@material-ui/icons/Search";
-import Bookmark from "@material-ui/icons/Bookmark";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { fetchOffers } from "../actions/actions";
-import { logoutStudent } from "../actions/authAction";
-import { logoutCompany } from "../actions/authCompanyAction";
-import { logoutAdmin } from "../actions/authAdminAction";
-import { clearCurrentProfileStudent } from "../actions/profileStudent";
-import { clearCurrentProfileCompany } from "../actions/profileCompanyAction";
-import { clearCurrentAdmin } from "../actions/authAdminAction";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import Grow from "@material-ui/core/Grow";
-import Paper from "@material-ui/core/Paper";
-import Popper from "@material-ui/core/Popper";
-import MenuList from "@material-ui/core/MenuList";
+import React from 'react';
+import PropTypes from 'prop-types';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import InputBase from '@material-ui/core/InputBase';
+import Badge from '@material-ui/core/Badge';
+import Button from '@material-ui/core/Button';
+import MenuItem from '@material-ui/core/MenuItem';
+import { fade } from '@material-ui/core/styles/colorManipulator';
+import { withStyles } from '@material-ui/core/styles';
+import SearchIcon from '@material-ui/icons/Search';
+import Bookmark from '@material-ui/icons/Bookmark';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchOffers } from '../actions/actions';
+import { logoutStudent } from '../actions/authAction';
+import { logoutCompany } from '../actions/authCompanyAction';
+import { logoutAdmin } from '../actions/authAdminAction';
+import { clearCurrentProfileStudent } from '../actions/profileStudent';
+import { clearCurrentProfileCompany } from '../actions/profileCompanyAction';
+import { clearCurrentAdmin } from '../actions/authAdminAction';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
+import MenuList from '@material-ui/core/MenuList';
 
 const styles = theme => ({
   root: {
-    display: "flex"
+    display: 'flex'
   },
   paper: {
     marginRight: theme.spacing(2),
-    minWidth: "150px"
+    minWidth: '150px'
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     height: 64,
-    minHeight: "fit-content",
-    backgroundColor: "#079681"
+    minHeight: 'fit-content',
+    backgroundColor: '#079681'
   },
   grow: {
     flexGrow: 1
   },
   title: {
-    minWidth: "fit-content",
-    fontSize: "20px",
-    "&:hover": {
-      color: "white",
-      backgroundColor: "transparent"
+    minWidth: 'fit-content',
+    fontSize: '20px',
+    '&:hover': {
+      color: 'white',
+      backgroundColor: 'transparent'
     }
   },
   search: {
-    position: "relative",
+    position: 'relative',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
-    "&:hover": {
+    '&:hover': {
       backgroundColor: fade(theme.palette.common.white, 0.25)
     },
     margin: theme.spacing(2),
     width: 250,
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(3),
-      width: "auto"
+      width: 'auto'
     }
   },
   searchIcon: {
     width: theme.spacing(9),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   inputRoot: {
-    color: "inherit",
-    width: "100%"
+    color: 'inherit',
+    width: '100%'
   },
   inputInput: {
     paddingTop: theme.spacing(1),
     paddingRight: theme.spacing(1),
     paddingBottom: theme.spacing(1),
     paddingLeft: theme.spacing(10),
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
       width: 200
     }
   }
@@ -120,7 +120,7 @@ class MenuListComposition extends React.Component {
             buttonRef={node => {
               this.anchorEl = node;
             }}
-            aria-owns={open ? "menu-list-grow" : undefined}
+            aria-owns={open ? 'menu-list-grow' : undefined}
             aria-haspopup="true"
             onClick={this.handleToggle}
             className="navbar-button"
@@ -134,12 +134,12 @@ class MenuListComposition extends React.Component {
                 id="menu-list-grow"
                 style={{
                   transformOrigin:
-                    placement === "bottom" ? "center top" : "center bottom"
+                    placement === 'bottom' ? 'center top' : 'center bottom'
                 }}
               >
                 <Paper>
                   <ClickAwayListener onClickAway={this.handleClose}>
-                    <MenuList>
+                    <MenuList onMouseLeave={this.handleClose}>
                       {features.map((el, i) => (
                         <MenuItem
                           onClick={el.click}
@@ -177,17 +177,20 @@ class PrimarySearchAppBar extends React.Component {
     e.preventDefault();
     this.props.clearCurrentProfileStudent();
     this.props.logoutStudent();
+    this.props.history.push('/');
   };
   onLogoutAdminClick = e => {
     e.preventDefault();
     this.props.clearCurrentAdmin();
     this.props.logoutAdmin();
+    this.props.history.push('/');
   };
 
   onLogoutCompanyClick = event => {
     event.preventDefault();
     this.props.clearCurrentProfileCompany();
     this.props.logoutCompany();
+    this.props.history.push('/');
   };
 
   render() {
@@ -195,20 +198,6 @@ class PrimarySearchAppBar extends React.Component {
     const { isAuthenticated } = this.props.auth;
     const { isTestify } = this.props.authAdmin;
     const { isAuthorize } = this.props.authCompany;
-
-    // const authLinks = (
-    //   <div>
-    //     <a href="" onClick={this.onLogoutClick} className="nav-link">
-    //       <img
-    //         className="rounded-circle"
-    //         src={student.avatar}
-    //         alt={student.name}
-    //         style={{ width: "25px", marginRight: "10px" }}
-    //       />
-    //       logout
-    //     </a>
-    //   </div>
-    // );
 
     return (
       <div className={classes.root}>
@@ -249,7 +238,7 @@ class PrimarySearchAppBar extends React.Component {
             </nav>
             <div className={classes.grow} />
             <div className="navbar-elements">
-              {isTestify ? (
+              {isTestify && (
                 <Button
                   component={Link}
                   to="/profiles-student"
@@ -257,10 +246,8 @@ class PrimarySearchAppBar extends React.Component {
                 >
                   Students
                 </Button>
-              ) : (
-                ""
               )}
-              {isTestify ? (
+              {isTestify && (
                 <Button
                   component={Link}
                   to="/profiles-company"
@@ -268,11 +255,9 @@ class PrimarySearchAppBar extends React.Component {
                 >
                   Companies
                 </Button>
-              ) : (
-                ""
               )}
 
-              {isAuthenticated || isTestify ? (
+              {(isAuthenticated || isTestify || isAuthorize) && (
                 <Button
                   component={Link}
                   to="/job-offers"
@@ -281,10 +266,8 @@ class PrimarySearchAppBar extends React.Component {
                 >
                   Offres
                 </Button>
-              ) : (
-                ""
               )}
-              {isAuthenticated ? (
+              {isAuthenticated && (
                 <div>
                   <IconButton color="inherit">
                     <Badge badgeContent={4} color="secondary">
@@ -297,89 +280,83 @@ class PrimarySearchAppBar extends React.Component {
                     </Badge>
                   </IconButton>
                 </div>
-              ) : (
-                ""
               )}
 
               {isTestify ? (
-                ""
+                ''
               ) : isAuthenticated ? (
                 <MenuListComposition
                   title="Account"
                   features={[
-                    { to: "/dashboard", title: "Dashboard", click: () => {} },
-                    { to: "", title: "Log out", click: this.onLogoutClick }
+                    { to: '/dashboard', title: 'Dashboard', click: () => {} },
+                    { to: '', title: 'Log out', click: this.onLogoutClick }
                   ]}
                 />
               ) : isAuthorize ? (
-                ""
+                ''
               ) : (
                 <MenuListComposition
                   title="espace étudiant"
                   features={[
-                    { to: "/register", title: "Sign Up", click: () => {} },
-                    { to: "/login", title: "Login", click: () => {} }
+                    { to: '/register', title: 'Sign Up', click: () => {} },
+                    { to: '/login', title: 'Login', click: () => {} }
                   ]}
                 />
               )}
 
               {isTestify ? (
-                ""
+                ''
               ) : isAuthorize ? (
                 <MenuListComposition
                   title="Account"
                   features={[
                     {
-                      to: "/dashboardCompany",
-                      title: "Dashboard Company",
+                      to: '/dashboardCompany',
+                      title: 'Dashboard Company',
                       click: () => {}
                     },
                     {
-                      to: "",
-                      title: "Log out Company",
+                      to: '/',
+                      title: 'Log out Company',
                       click: this.onLogoutCompanyClick
                     }
                   ]}
                 />
               ) : isAuthenticated ? (
-                ""
+                ''
               ) : (
                 <MenuListComposition
                   title="espace entreprise"
                   features={[
                     {
-                      to: "/registerCompany",
-                      title: "Sign Up Company",
+                      to: '/registerCompany',
+                      title: 'Sign Up Company',
                       click: () => {}
                     },
                     {
-                      to: "/loginCompany",
-                      title: "Login Company",
+                      to: '/loginCompany',
+                      title: 'Login Company',
                       click: () => {}
                     }
                   ]}
                 />
               )}
-              {isTestify ? (
+              {isTestify && (
                 <Button
                   className="navbar-button"
                   component={Link}
-                  to={"/dashboardAdmin"}
+                  to={'/dashboardAdmin'}
                 >
                   Dashboard
                 </Button>
-              ) : (
-                ""
               )}
-              {isTestify ? (
+              {isTestify && (
                 <Button
                   className="navbar-button"
                   onClick={this.onLogoutAdminClick}
                 >
                   Log out
                 </Button>
-              ) : (
-                ""
               )}
             </div>
           </Toolbar>
@@ -398,11 +375,11 @@ const mapStateToProps = state => ({
   authAdmin: state.authAdmin,
   authCompany: state.authCompany
 });
-const fetchOffers2 = () => dispatch => {
-  dispatch(fetchOffers());
-};
+// const fetchOffers2 = () => dispatch => {
+//   dispatch(fetchOffers());
+// };
 const mapDispatchToProps = {
-  fetchOffers: fetchOffers2,
+  fetchOffers,
   logoutStudent,
   logoutCompany,
   logoutAdmin,
@@ -416,6 +393,6 @@ const ConnectedPrimarySearchAppBar = connect(
   mapDispatchToProps
 )(PrimarySearchAppBar);
 
-export default (PrimarySearchAppBar = withStyles(styles)(
+export default PrimarySearchAppBar = withRouter(withStyles(styles)(
   ConnectedPrimarySearchAppBar
 ));

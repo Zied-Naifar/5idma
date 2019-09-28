@@ -76,6 +76,7 @@ body {
   margin: 15px;
   box-shadow: 0 0 16px #ccc;
   min-width: 415px !important;
+  background-color: white !important;
 }
 .logo {
   border: 1px solid lightgrey;
@@ -121,13 +122,13 @@ body {
 }
 /* styles for '...' to hide text if it more than 3 lines*/
 .offer-card-text:before {
-  content: "...";
+  content: '...';
   position: absolute;
   right: 4px;
   bottom: 0px;
 }
 .offer-card-text:after {
-  content: "";
+  content: '';
   position: absolute;
   right: 0;
   width: 1em;
@@ -160,11 +161,11 @@ body {
 /*page de présentation d'un job*/
 
 .job-presentation {
- flex: 1
+  flex: 1;
 }
 .job-presentation-card {
   margin-top: 20px;
-  width: "80%";
+  width: '80%';
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
@@ -207,11 +208,22 @@ body {
   align-items: center;
 }
 .card-company-presentation-info {
-  margin: 1px !important
+  margin: 1px !important;
+}
+.card {
+  background-color: #45B0A1
 }
 .save-icon {
   font-size: 34px !important;
 }
 .icon-margin {
   margin: 0 8px;
+}
+.profil {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+.text-profil{
+  color: #45B0A1
 }

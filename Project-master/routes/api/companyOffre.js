@@ -70,7 +70,7 @@ router.get('/:id', (req, res) => {
 // @access  Private
 router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {  
     const errors = {};
-    CompanyOffre.findOne({ company: req.user.id })
+    CompanyOffre.findOne({ company: req.body.id })
         .populate('company', ['name', 'avatar'])
         .then( offre => {
             if(!offre) {
@@ -99,7 +99,7 @@ router.post('/create', passport.authenticate('jwt', { session: false }), (req, r
 
     // GEt fields
     const offerFields = {};
-    offerFields.company = req.user.id;
+    offerFields.company = req.body.id;
     if(req.body.handle) offerFields.handle = req.body.handle;
     if(req.body.position) offerFields.position = req.body.position;
     if(req.body.description) offerFields.description = req.body.description;

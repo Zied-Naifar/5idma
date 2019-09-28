@@ -55,9 +55,9 @@ router.get('/:user_id', (req, res) => {
 // @route   GET api/CompanyProfile
 // @desc    get current company profile
 // @access  Private
-router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {  
+router.get('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {  
     const errors = {};
-    CompanyProfile.findOne({ company: req.user.id })
+    CompanyProfile.findOne({ company: req.params.id })
         .populate('company', ['name', 'email', 'address', 'phoneNumber', 'avatar', 'date'])
         .then( profile => {
             if(!profile) {
@@ -102,14 +102,14 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
     if(req.body.linkedin) profileFields.social.linkedin = req.body.linkedin;
     if(req.body.instagram) profileFields.social.instagram = req.body.instagram;
 
-    CompanyProfile.findOne({ company: req.params.id })
+    CompanyProfile.findOne({ company: req.body.id })
         .then(profile => {
 
             console.log("profile =  " + profile)
             if(profile) {
                 // Update
                 CompanyProfile.findOneAndUpdate(
-                    { company: req.user.id },
+                    { company: req.body.id },
                     { $set: profileFields },
                     { new: true }
                 )

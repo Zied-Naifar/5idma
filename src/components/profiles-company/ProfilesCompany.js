@@ -13,7 +13,6 @@ class ProfilesCompany extends Component {
   render() {
     const { profilesCompany, loading } = this.props.profileCompany;
     let profileCompanyItems;
-console.log(profilesCompany)
     if (profilesCompany=== null || loading) {
       profileCompanyItems = <Spinner />;
     } else {

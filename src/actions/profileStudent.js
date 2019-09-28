@@ -1,35 +1,44 @@
 import axios from 'axios';
 
 import {
-    GET_PROFILE_STUDENT,
-    PROFILE_STUDENT_LOADING,
-    GET_ERRORS,
-    CLEAR_CURRENT_STUDENT_PROFILE,
-    GET_PROFILES_STUDENT ,
-    SET_CURRENT_STUDENT} from './types';
+  GET_PROFILE_STUDENT,
+  PROFILE_STUDENT_LOADING,
+  GET_ERRORS,
+  CLEAR_CURRENT_STUDENT_PROFILE,
+  GET_PROFILES_STUDENT,
+  SET_CURRENT_STUDENT
+} from './types';
 
 // get current student profile
-export const getCurrentProfileStudent = () => dispatch => {
-dispatch(setProfileStudentLoading());
-axios.get('/api/studentprofile')
-.then(res => dispatch ({
-    type : GET_PROFILE_STUDENT,
-    payload : res.data
-}))
-.catch (err => dispatch({
-    type:GET_PROFILE_STUDENT,
-    payload: {}
-}));
+export const getCurrentProfileStudent = (id) => dispatch => {
+  dispatch(setProfileStudentLoading());
+  axios
+    .get(`/api/studentprofile/${id}`)
+    .then(res =>
+      dispatch({
+        type: GET_PROFILE_STUDENT,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_PROFILE_STUDENT,
+        payload: {}
+      })
+    );
 };
 
 // Profile loading
 export const setProfileStudentLoading = () => {
-    return {
-      type: PROFILE_STUDENT_LOADING
-    };
+  return {
+    type: PROFILE_STUDENT_LOADING
   };
- // Create Profile
-export const createProfileStudent = (profileStudentData, history) => dispatch => {
+};
+// Create Profile
+export const createProfileStudent = (
+  profileStudentData,
+  history
+) => dispatch => {
   axios
     .post('/api/studentprofile', profileStudentData)
     .then(res => history.push('/dashboard'))
@@ -39,15 +48,13 @@ export const createProfileStudent = (profileStudentData, history) => dispatch =>
         payload: err.response.data
       })
     );
-}; 
-  // Clear profile
+};
+// Clear profile
 export const clearCurrentProfileStudent = () => {
-    return {
-      type: CLEAR_CURRENT_STUDENT_PROFILE
-    };
-  
-
+  return {
+    type: CLEAR_CURRENT_STUDENT_PROFILE
   };
+};
 // Get profile by handle
 export const getStudentProfileByHandle = handle => dispatch => {
   dispatch(setStudentProfileLoading());
@@ -65,26 +72,26 @@ export const getStudentProfileByHandle = handle => dispatch => {
         payload: null
       })
     );
-};  
+};
 //delete profile & account
-export const deleteStudentAccount  =() =>dispatch =>{
-if (window.confirm('are you sure ? this can not be undone')){
-  axios
-  .delete('/api/studentprofile')
-  .then(res =>
-    dispatch({
-      type: SET_CURRENT_STUDENT,
-      payload: {}
-    })
-  )
-  .catch(err =>
-    dispatch({
-      type: GET_ERRORS,
-      payload: err.response.data
-    })
-  );
-}
-}  ;
+export const deleteStudentAccount = () => dispatch => {
+  if (window.confirm('are you sure ? this can not be undone')) {
+    axios
+      .delete('/api/studentprofile')
+      .then(res =>
+        dispatch({
+          type: SET_CURRENT_STUDENT,
+          payload: {}
+        })
+      )
+      .catch(err =>
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })
+      );
+  }
+};
 
 // Get all profiles
 export const getStudentProfiles = () => dispatch => {
@@ -97,7 +104,8 @@ export const getStudentProfiles = () => dispatch => {
         payload: res.data
       })
     )
-    .catch(err => console.log(err)
+    .catch(
+      err => console.log(err)
       // dispatch({
       //   type: GET_PROFILES_STUDENT ,
       //   payload: null
@@ -169,4 +177,3 @@ export const deleteEducation = id => dispatch => {
       })
     );
 };
-  

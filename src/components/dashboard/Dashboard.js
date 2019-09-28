@@ -6,18 +6,17 @@ import {
   getCurrentProfileStudent,
   deleteStudentAccount
 } from '../../actions/profileStudent';
+import ProfileStudent from '../profile-student/ProfileStudent';
 import Spinner from '../common/Spinner';
 import ProfileStudentActions from './ProfileStudentAction';
-import Experience from './Experience';
-import Education from './Education';
+// import Experience from './Experience';
+// import Education from './Education';
+
 class Dashboard extends Component {
   componentWillMount() {
-    this.props.getCurrentProfileStudent();
+    this.props.getCurrentProfileStudent(this.props.auth.student.id);
   }
-  // componentWillUpdate() {
-  //   // this.props.getCurrentProfileStudent();
-  //   console.log(' componentWillUpdate')
-  // }
+
   onDeleteClick = () => {
     this.props.deleteStudentAccount();
   };
@@ -35,18 +34,16 @@ class Dashboard extends Component {
         dashboardContent = (
           <div>
             <p className="lead text-muted">
-              Welcome
-              <Link to={`/studentprofile/${profileStudent.handle}`}>
-                {student.name}
-              </Link>
+              {`Welcome ${student.name.toUpperCase()}`}
             </p>
             <ProfileStudentActions />
-            <Experience experience={profileStudent.experience} />
-            <Education education={profileStudent.education} />
-            <div style={{ marginBottom: '60px' }} />
+            <ProfileStudent />
+            {/* <Experience experience={profileStudent.experience} />
+            <Education education={profileStudent.education} /> */}
             <button
-              onClick={() => this.onDeleteClick()}
+              onClick={this.onDeleteClick}
               className="btn btn-danger"
+              style={{ margin: '20px 10px 60px' }}
             >
               Delete My Account
             </button>

@@ -64,7 +64,7 @@ import Moment from 'react-moment';
     return (
       <div className="row">
         <div className="col-md-6">
-          <h3 className="text-center text-info">Experience</h3>
+          <h3 className="text-center text-profil">Experience</h3>
           {expItems.length > 0 ? (
             <ul className="list-group">{expItems}</ul>
           ) : (
@@ -73,7 +73,7 @@ import Moment from 'react-moment';
         </div>
 
         <div className="col-md-6">
-          <h3 className="text-center text-info">Education</h3>
+          <h3 className="text-center text-profil">Education</h3>
           {eduItems.length > 0 ? (
             <ul className="list-group">{eduItems}</ul>
           ) : (
